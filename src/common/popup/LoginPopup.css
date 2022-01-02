@@ -1,3 +1,42 @@
+/*
+Guidelines On clicking the Login button
+----------------------------------
+the Login/Register modal should pop up for filling in details. 
+You must use the ‘Modal’ from the react-modal package to implement this. 
+The modal should have two tabs: Login and Register.
+You must use the Tabs component of Material UI to have these two tabs. 
+Also, this modal should be displayed in the middle of the screen.
+
+You must use the FormControl component of Material UI for each text field. 
+Inside each FormControl component, you must use the InputLabel and 
+    Input components for displaying these text fields. You must also have 
+    the validation in place to validate the data by using the validators 
+    provided by Material UI.
+
+*/
+
+/*
+Guidelines for the Login Tab
+----------------------------------
+It should have an input field Username.
+It should ask for the password.
+On clicking the Login button, users should be able to log in 
+when the username and password provided are correct.
+*/
+
+/*
+Guidelines for the Register Modal
+---------------------------------------------
+It should have a field for the first name.
+It should have a field for the last name.
+It should have a field for email
+It should have a field for password.
+It should have a field for contact numbers.
+If information is not entered in these fields, then the error message ‘required’
+ should be displayed. This is shown in the image below.
+On successful registration, it should show the message ‘Registration Successful. 
+Please Login!’ above the Register button. This is shown in the images below.
+*/
 .login_popup__modal {
     position: absolute;
     top: 40%;

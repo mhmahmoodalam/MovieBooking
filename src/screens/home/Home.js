@@ -3,15 +3,12 @@ import './Home.css';
 import UpComingMovies from "./UpComingMovies";
 import ReleasedMovies from "./ReleasedMovies";
 
-const Home = () => {
+const Home = (props) => {
 
   return (
       <div>
-          
-          <div>Home page</div>
-          <UpComingMovies/>
-          <ReleasedMovies/>
-
+          <UpComingMovies { ...props }/>
+          <ReleasedMovies { ...props }/>
       </div>
   )
 }

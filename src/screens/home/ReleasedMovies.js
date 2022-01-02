@@ -1,9 +1,30 @@
 import React from "react";
+import ReleasedMoviesFilter from "./ReleasedMoviesFilter";
+import ReleasedMoviesList from "./ReleasedMoviesList";
+const ReleasedMovies = (props) => {
+  const [releasedMoviesList, setReleasedMoviesList] = React.useState([]);
+  const [filter, setFilter] = React.useState({});
+  React.useEffect(() => {
 
-const ReleasedMovies = () => {
-
+    fetch(props.baseUrl + "movies?page=1&limit=10", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache",
+      }
+    })
+      .then((response) => response.json())
+      .then((response) => {
+          setReleasedMoviesList(response.movies)
+      })
+    },[filter])
   return (
-    <div>Released Movies</div>
-  )
+    <div>
+      <div className="">
+         <ReleasedMoviesList releasedMoviesList={releasedMoviesList}/>
+         <ReleasedMoviesFilter setFilter={setFilter} filter={filter}/>
+      </div>
+    </div>
+  );
 }
 export default ReleasedMovies

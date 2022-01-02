@@ -7,6 +7,12 @@ The Upcoming Movies heading should have a padding of 8px from all the sides.
 The text of the heading should be centre-aligned.
 The font size of the text should be 1rem.
 */
+.home_upcoming_movies_heading {
+    background-color: #ff9999;
+    padding: 8px;
+    font-size: 1rem;
+    text-align: center;
+}
 
 /*
 Guideleines for the ‘Upcoming Movies Grid’ 
@@ -27,6 +33,19 @@ It should show the titles of the movies as well, and this information must be
 
 You must use the GridList component of Material UI to leverage the various functionality.
 */
+.home_upcoming_movies_grid_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.home_upcoming_movies_grid_list {
+    flex-wrap: nowrap !important;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    transform: translateZ(0);
+}
 
 /*
 Guideleines for the 'REleased Movies Grid’ 
