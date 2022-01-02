@@ -3,11 +3,10 @@ const ReleasedMoviesFilter = (props) => {
   const { setFilter, filter } = props
   
   return (
-    <div>
-      <div className="">
+    
+      <div className="released__movie_filter">
         ReleasedMoviesFilter
       </div>
-    </div>
   );
 }
 export default ReleasedMoviesFilter

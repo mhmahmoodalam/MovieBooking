@@ -27,7 +27,7 @@ const UpComingMovies = (props) => {
       <div className="home_upcoming_movies_grid_container">
         <GridList cellHeight={250} className="home_upcoming_movies_grid_list" cols={6} rows={1}>
           {upcomingMoviesList.map((tile) => (
-            <GridListTile key={tile.id}>
+            <GridListTile key={tile.id} style={{ margin : '0px 5px'}}>
               <img src={tile.poster_url} alt={tile.title} />
               <GridListTileBar title={tile.title} />
             </GridListTile>

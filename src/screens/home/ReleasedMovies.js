@@ -18,10 +18,15 @@ const ReleasedMovies = (props) => {
           setReleasedMoviesList(response.movies)
       })
     },[filter])
+
+  const handleMovieGridClick = (movieId) => {
+    props.history.push(`/movie/${movieId}`)
+
+  }
   return (
     <div>
-      <div className="">
-         <ReleasedMoviesList releasedMoviesList={releasedMoviesList}/>
+      <div className="released__movie_container">
+         <ReleasedMoviesList releasedMoviesList={releasedMoviesList} handleMovieGridClick={handleMovieGridClick}/>
          <ReleasedMoviesFilter setFilter={setFilter} filter={filter}/>
       </div>
     </div>

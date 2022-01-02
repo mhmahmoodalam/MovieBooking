@@ -2,6 +2,7 @@ import React from "react";
 import './Home.css';
 import UpComingMovies from "./UpComingMovies";
 import ReleasedMovies from "./ReleasedMovies";
+import {  withRouter } from 'react-router-dom';
 
 const Home = (props) => {
 
@@ -12,4 +13,4 @@ const Home = (props) => {
       </div>
   )
 }
-export default Home
+export default withRouter(Home)

@@ -58,7 +58,27 @@ You should use the CSS property flex-container and set the value of display as f
 
 Also, these two parts should have a margin of 16px.
 */
+.released__movie_container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
 
+.released__movie_list {
+    width: 76%;
+    margin: 16px;
+}
+
+.released__movie_grid {
+    margin : 10px 15px;
+    cursor: pointer;
+}
+
+.released__movie_filter {
+    width: 24%;
+    margin: 16px;
+    border: 1px solid black;
+}
 /*
 Guideleines for the 'Released Movies list' 
 ---------------------------------------------------------------
