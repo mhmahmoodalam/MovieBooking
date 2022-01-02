@@ -1,0 +1,82 @@
+/*
+Guideleines for the ‘Upcoming Movies’ heading on the home page:
+---------------------------------------------------------------
+It should be placed below the header of the page.
+The background colour of the heading should be #ff9999.
+The Upcoming Movies heading should have a padding of 8px from all the sides.
+The text of the heading should be centre-aligned.
+The font size of the text should be 1rem.
+*/
+
+/*
+Guideleines for the ‘Upcoming Movies Grid’ 
+---------------------------------------------------------------
+It should be placed below the ‘Upcoming Movies’ heading.
+
+It should show 6 movies when the home page loads the first time, 
+    and there should be a scroll bar to scroll the movies horizontally.
+
+It should show movie images, and this information must be displayed from 
+    the state variable that stores the property ‘poster_url’. You must use the 
+    GridListTile component of Material UI for showing the grid tiles. 
+    Also, the cell height of the grid tiles should be 250.
+
+It should show the titles of the movies as well, and this information must be 
+    displayed from the state variable that stores the property ‘title’. 
+    You must use the GridListTileBar for showing the title.
+
+You must use the GridList component of Material UI to leverage the various functionality.
+*/
+
+/*
+Guideleines for the 'REleased Movies Grid’ 
+---------------------------------------------------------------
+The page space should be divided into two parts: 
+    The left side for showing the movies’ images, which occupy 76% of the page width, 
+    and the right side to show the filters, which occupy 24% of the page width. 
+
+You should use the CSS property flex-container and set the value of display as flex. 
+
+Also, these two parts should have a margin of 16px.
+*/
+
+/*
+Guideleines for the 'Released Movies list' 
+---------------------------------------------------------------
+You must use the GridList component of Material UI to show the movies in a grid.
+The height of each cell of the grid should be 350, and you can show maximum 4 
+    movies in a single line. This means the value of the columns should be 4. 
+
+The movies’ images along with their names and released dates should be displayed.
+
+The movie image information must be displayed from the state variable that stores the 
+    property ‘poster_url’. You must use the GridListTile component of 
+    Material UI for showing the grid tiles.
+
+The movies’ title information must be displayed from the state variable that 
+    stores the property ‘title’. You must use the GridListTileBar for showing 
+    the titles.
+
+On clicking a movie image, users should be redirected to the details 
+    page (which you will develop next).
+
+On hovering the cursor over an image, it should change to a pointer that displays 
+    a pointing hand.
+
+*/
+
+/*
+Guideleines for the 'REleased Movies Filter' 
+---------------------------------------------------------------
+The filters must be shown inside a card. You must use the Material UI Card component
+     for the filters. Each component of the card should have ‘theme.spacing.unit’ 
+     as the margin, with minWidth and maxWidth as 240. 
+
+The card should have the heading ‘FIND MOVIES BY:’ (all uppercase) with 
+    ‘theme.palette.primary.light’ as the colour.
+
+You must use the FormControl component of Material UI for each text field.
+Inside each FormControl component, you must use InputLabel and Input components 
+    for displaying these text fields.
+
+*/
