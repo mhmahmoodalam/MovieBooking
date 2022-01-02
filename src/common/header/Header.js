@@ -6,7 +6,7 @@ import {  withRouter } from 'react-router-dom';
 import * as TokenUtil from '../../utils/TokenUtil';
 
 const Header = (props) => {
-  const { isAuthenticated, location,history, setAuthenticated } = props
+  const { isAuthenticated, location,history, setAuthenticated, setShowLoginModal } = props
   const loginButtonText = isAuthenticated? 'Logout':'Login'
   const isOnMovieDetailPage =  location && location.pathname && location.pathname.includes('/movie/')
   React.useEffect(() => {
@@ -15,11 +15,14 @@ const Header = (props) => {
     }
   },[location])
 
-  const handleLoginLogout = (isAuthenticated) => {
+  const handleLoginLogout = () => {
     if (isAuthenticated) {
       TokenUtil.clearToken();
       setAuthenticated(false);
       history.push("/");
+    }else {
+        console.log("Not logged in..please login first..")
+        setShowLoginModal(true)
     }
   };
   return (

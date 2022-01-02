@@ -18,7 +18,10 @@ const Controller = (props) => {
   return (
     <Router>
       <div className="main-container">
-        <Header isAuthenticated={isAuthenticated} setAuthenticated={setAuthenticated}/>
+        <Header isAuthenticated={isAuthenticated} 
+          setAuthenticated={setAuthenticated} 
+          setShowLoginModal={setShowLoginModal}
+        />
         <Route
           exact
           path="/"
@@ -36,7 +39,11 @@ const Controller = (props) => {
           path="/confirm/:id"
           render={(props) => <Confirmation {...props} baseUrl={baseUrl} />}
         />
-        <LoginPopup showLoginModal={showLoginModal} />
+        <LoginPopup 
+          showLoginModal={showLoginModal}           
+          setAuthenticated={setAuthenticated} 
+          setShowLoginModal={setShowLoginModal}
+        />
       </div>
     </Router>
   );
