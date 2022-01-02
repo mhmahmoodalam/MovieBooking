@@ -10,9 +10,8 @@ import LoginPopup from "../common/popup/LoginPopup";
 
 const Controller = (props) => {
   const baseUrl = "/api/v1/";
-  TokenUtil.setToken("Bearer 9348750345--0dfoi08345o3pjtpoer");
   const [ isAuthenticated, setAuthenticated ] = useState(TokenUtil.isAuthenticated())  
-  const [ showLoginModal, setShowLoginModal ] = useState(!TokenUtil.isAuthenticated())  
+  const [ showLoginModal, setShowLoginModal ] = useState(true)  
   console.log("controller called",props, isAuthenticated, showLoginModal)
 
   return (

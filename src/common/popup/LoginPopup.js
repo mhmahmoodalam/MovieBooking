@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './LoginPopup.css'
 import {  withRouter } from 'react-router-dom';
 import Login from "../../screens/login/Login";
 import Register from "../../screens/register/Register";
@@ -28,6 +29,7 @@ const LoginPopup = (props) => {
           appElement={document.getElementById("root")}
           shouldCloseOnOverlayClick={true}
           onRequestClose={() => setShowLoginModal(false)}
+          className="login_popup__modal"
         >
           <Tabs value={tabValue} onChange={handleTabChange}>
             <Tab label="Login" />
