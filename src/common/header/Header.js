@@ -24,14 +24,25 @@ const Header = (props) => {
         console.log("Not logged in..please login first..")
         setShowLoginModal(true)
     }
-  };
+  }
+
+  const handleBookNow = (e) => {
+    e.preventDefault()
+    if(isAuthenticated){
+      const id = location.pathname.split('/movie/')[1]
+      history.push(`/bookshow/${id}`)
+    }else {
+      setShowLoginModal(true)
+    }
+  }
+
   return (
     <div className="header">
         <img className="header__logo" src={Logo} alt="Header Logo" />
         <div >
             {
                 isOnMovieDetailPage &&
-                <Button variant="contained" color="primary" className="header__button">
+                <Button variant="contained" color="primary" className="header__button" onClick={handleBookNow}>
                     BOOK SHOW
                 </Button>
             }

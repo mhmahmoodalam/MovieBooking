@@ -57,7 +57,7 @@ const Details = (props) => {
         setLoading(false)
       })
   },[])
-  console.log(props)
+  
   return (
     <div>
       {loading && (
