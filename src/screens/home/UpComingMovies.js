@@ -17,7 +17,6 @@ const UpComingMovies = (props) => {
     })
       .then((response) => response.json())
       .then((response) => {
-          console.log(response)
         setUpcomingMoviesList(response.movies)
       })
     },[])
@@ -25,9 +24,9 @@ const UpComingMovies = (props) => {
     <div>
       <div className="home_upcoming_movies_heading">Upcoming Movies</div>
       <div className="home_upcoming_movies_grid_container">
-        <GridList cellHeight={250} className="home_upcoming_movies_grid_list" cols={6} rows={1}>
+        <GridList cellHeight={250} className="home_upcoming_movies_grid_list" cols={6}>
           {upcomingMoviesList.map((tile) => (
-            <GridListTile key={tile.id} style={{ margin : '0px 5px'}}>
+            <GridListTile key={tile.id} >
               <img src={tile.poster_url} alt={tile.title} />
               <GridListTileBar title={tile.title} />
             </GridListTile>
