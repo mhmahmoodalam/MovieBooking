@@ -1,6 +1,7 @@
 import React from "react";
-import { FormControl, Input, InputLabel, Button, withStyles, Typography } from "@material-ui/core";
-import { generateFieldsErrorDefault, generateFormInitialValues } from "../../common/form/FormUtils";
+import { FormControl, Input, InputLabel, Button, withStyles, Typography } from "@material-ui/core"
+import { generateFieldsErrorDefault, generateFormInitialValues } from "../../common/form/FormUtils"
+import * as TokenUtil from '../../utils/TokenUtil'
 
 const style  = theme => ( {
   centerElement : {
@@ -77,6 +78,7 @@ const Login = (props) => {
 
             props.setAuthenticated(true)
             props.setShowLoginModal(false)
+            TokenUtil.setToken(btoa(`${formData.username}:${formData.password}`))
 
           }else if( response.status >= 400 && response.status < 500 ){
             // won't show actual error as it can lead to guessing

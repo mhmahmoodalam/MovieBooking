@@ -18,20 +18,25 @@ const style  =theme =>({
 const Register = (props) => {
     const { classes } = props
     const formInputFields = [
-        { name :'firstname', label: "First Name", required: true, type: 'text', autoFocus: true },
-        { name :'lastname', label: "Last Name", required: true, type: 'text' , autoFocus: false},
-        { name :'email', label: "Email", required: true, type: 'email', autoFocus: false},
+        { name :'first_name', label: "First Name", required: true, type: 'text', autoFocus: true },
+        { name :'last_name', label: "Last Name", required: true, type: 'text' , autoFocus: false},
+        { name :'email_address', label: "Email", required: true, type: 'email', autoFocus: false},
         { name :'password', label: "Password", required: true, type: 'password', autoFocus: false },
-        { name :'contact', label: "Contact No", required: true, type: 'text', autoFocus: false },
+        { name :'mobile_number', label: "Contact No", required: true, type: 'text', autoFocus: false },
     ]
     
     const [ formError, setFormError ] = React.useState(generateFieldsErrorDefault(formInputFields))
     const [ formData, setFormData ] = React.useState(generateFormInitialValues(formInputFields))
     const [ canSubmit, setCanSubmit ] = React.useState(false)
+    const [ registerFailed, setRegisterFailed ] = React.useState(false)
+    const [ registerSuccess, setRegisterSuccess ] = React.useState(false)
 
     const handleChange = (e) => {
       const { name, value } = e.target
       setFormData({ ...formData, [name] : value })
+      if(registerFailed){
+        setRegisterFailed(false)
+      }
     }
 
     const validate = (values) => {
@@ -42,14 +47,14 @@ const Register = (props) => {
         return { ...prev, [current]: { isValid , errMsg: 'required' } }
       },{})
 
-      if(errors.email.isValid && !regexEmail.test(values.email)){
-        errors.email = { isValid: false, errMsg: "Invalid email format"}
+      if(errors.email_address.isValid && !regexEmail.test(values.email_address)){
+        errors.email_address = { isValid: false, errMsg: "Invalid email format"}
       }
       if(errors.password.isValid && values.password.length < 4 ){
         errors.password = { isValid: false, errMsg: "Password length less than 4"}
       }
-      if(errors.contact.isValid && !regexPhone.test(values.contact) ){
-        errors.contact = { isValid: false, errMsg: "Invalid contact no format"}
+      if(errors.mobile_number.isValid && !regexPhone.test(values.mobile_number) ){
+        errors.mobile_number = { isValid: false, errMsg: "Invalid contact no format"}
       }
 
       setCanSubmit(Object.keys(errors).reduce((prev,key)=> {
@@ -67,8 +72,29 @@ const Register = (props) => {
     
     React.useEffect(() => {
       if(canSubmit) {
-        console.log("cansubmit", formData);
+        fetch(props.baseUrl + `signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache"
+          } ,
+          body : JSON.stringify(formData)
+          
+        })
+          .then((response) => {
+            if(response.status === 201 ){  
+              setRegisterSuccess(true)  
+            }else if( response.status >= 400 && response.status < 500 ){
+              // won't show actual error as it can lead to guessing
+              // error shows if username or password was wrong
+              // show will just show invalid credentials
+              setRegisterFailed(true)
+            }
+          }).catch(( err) =>{
+              console.log(err)
+          })
       }
+  
     },[formError])
 
     return (
@@ -107,6 +133,14 @@ const Register = (props) => {
                 })
             }
           <br />
+          {
+            registerFailed && 
+            <Typography color="error">Registration Failed!</Typography>
+          }
+          {
+            registerSuccess && 
+            <Typography color="primary">Registration Successful. Please Login!</Typography>
+          }
           <br />
           <Button
                 variant="contained"

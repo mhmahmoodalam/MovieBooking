@@ -6,11 +6,12 @@ import { BrowserRouter as Router,  Route } from "react-router-dom";
 import BookShow from "../screens/bookshow/BookShow";
 import Confirmation from "../screens/confirmation/Confirmation";
 import LoginPopup from "../common/popup/LoginPopup";
+import * as TokenUtil from '../utils/TokenUtil'
 
 const Controller = (props) => {
   const baseUrl = "/api/v1/";
-  const [ isAuthenticated, setAuthenticated ] = useState(false)  
-  const [ showLoginModal, setShowLoginModal ] = useState(true)  
+  const [ isAuthenticated, setAuthenticated ] = useState(TokenUtil.isAuthenticated())  
+  const [ showLoginModal, setShowLoginModal ] = useState(false)  
   console.log("controller called",props, isAuthenticated, showLoginModal)
 
   return (

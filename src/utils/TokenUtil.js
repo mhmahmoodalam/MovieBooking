@@ -16,5 +16,5 @@ export const setToken = (token) => {
 }
 
 export const clearToken = (token) => {
-    sessionStorage.clear("access-token");
+    sessionStorage.removeItem("access-token");
 }
