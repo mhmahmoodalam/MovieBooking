@@ -39,7 +39,7 @@ Please Login!’ above the Register button. This is shown in the images below.
 */
 .login_popup__modal {
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 40%;
     margin-top: -50px;
     margin-left: -50px;
