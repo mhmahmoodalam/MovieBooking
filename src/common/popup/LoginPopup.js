@@ -18,7 +18,7 @@ const  TabContainer = (props) => {
 
 
 const LoginPopup = (props) => {
-    const { showLoginModal, setAuthenticated, setShowLoginModal } = props
+    const { showLoginModal, setShowLoginModal } = props
     const [ tabValue, setTabValue  ] = useState(0)
 
     const handleTabChange = (event, value) => setTabValue(value)
@@ -38,16 +38,14 @@ const LoginPopup = (props) => {
           {tabValue === 0 && (
             <TabContainer>
               <Login
-                setAuthenticated={setAuthenticated}
-                setShowLoginModal={setShowLoginModal}
+                {...props}
               />
             </TabContainer>
           )}
           {tabValue === 1 && (
             <TabContainer>
               <Register
-                setAuthenticated={setAuthenticated}
-                setShowLoginModal={setShowLoginModal}
+                {...props}
               />
             </TabContainer>
           )}

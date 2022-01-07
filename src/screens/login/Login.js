@@ -1,5 +1,4 @@
 import React from "react";
-import {  withRouter } from 'react-router-dom';
 import { FormControl, Input, InputLabel, Button, withStyles, Typography } from "@material-ui/core";
 import { generateFieldsErrorDefault, generateFormInitialValues } from "../../common/form/FormUtils";
 
@@ -14,26 +13,33 @@ const style  = theme => ( {
 },
 fieldContainer: {
     marginBottom: theme.spacing.unit,
-},
-loginButton: {
-    margin: 'auto'
 }
 })
 
 const Login = (props) => {
     const { classes } = props
     const formInputFields = [
-      { name :'username', label: "Username", required: true, type: 'text' },
-      { name :'password', label: "Password", required: true, type: 'password' }
+      { name :'username', label: "Username", required: true, type: 'text', autoFocus: true },
+      { name :'password', label: "Password", required: true, type: 'password', autoFocus: false }
   ]
   
   const [ formError, setFormError ] = React.useState(generateFieldsErrorDefault(formInputFields))
   const [ formData, setFormData ] = React.useState(generateFormInitialValues(formInputFields))
   const [ canSubmit, setCanSubmit ] = React.useState(false)
+  const [ loginFailed, setLoginFailed ] = React.useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name] : value })
+    if(loginFailed){
+      setLoginFailed(false)
+    }
+  }
+
+  const resetForm = () =>{
+    setFormError(generateFieldsErrorDefault(formInputFields))
+    setFormData(generateFormInitialValues(formInputFields))
+    setCanSubmit(false)
   }
 
   const validate = (values) => {
@@ -57,9 +63,31 @@ const Login = (props) => {
   }
   
   React.useEffect(() => {
-
     if(canSubmit) {
-      console.log('cansubmit')
+      fetch(props.baseUrl + `auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache",
+          "Authorization": `Basic ${btoa(`${formData.username}:${formData.password}`)}`
+        } 
+      })
+        .then((response) => {
+          if(response.status === 200 ){
+
+            props.setAuthenticated(true)
+            props.setShowLoginModal(false)
+
+          }else if( response.status >= 400 && response.status < 500 ){
+            // won't show actual error as it can lead to guessing
+            // error shows if username or password was wrong
+            // show will just show invalid credentials
+            setLoginFailed(true)
+            resetForm()
+          }
+        }).catch(( err) =>{
+            console.log(err)
+        })
     }
 
   },[formError])
@@ -86,6 +114,7 @@ const Login = (props) => {
                            error={!formError[field.name].isValid}
                            onChange={handleChange}
                            value={formData[field.name]}
+                           autoFocus={field.autoFocus}
                          />
                          {!formError[field.name].isValid && (
                            <Typography color="error">{formError[field.name].errMsg}</Typography>
@@ -95,9 +124,14 @@ const Login = (props) => {
                        <br />
                      </div>
                    );
-                })
+                })              
+                
             }
           <br />
+          {
+            loginFailed && 
+            <Typography color="error">Invalid Credentials!</Typography>
+          }
           <br />
           <Button
                 variant="contained"
@@ -112,4 +146,4 @@ const Login = (props) => {
 }
 
 
-export default withRouter(withStyles(style)(Login))
+export default withStyles(style)(Login)

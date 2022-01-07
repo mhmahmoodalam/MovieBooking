@@ -1,5 +1,4 @@
 import React from "react";
-import {  withRouter } from 'react-router-dom';
 import { FormControl, Input, InputLabel, Button, withStyles, Typography } from "@material-ui/core";
 import { generateFieldsErrorDefault, generateFormInitialValues } from "../../common/form/FormUtils";
 
@@ -14,19 +13,16 @@ const style  =theme =>({
     },
     fieldContainer: {
         marginBottom: theme.spacing.unit,
-    },
-    loginButton: {
-        margin: 'auto'
     }
 })
 const Register = (props) => {
     const { classes } = props
     const formInputFields = [
-        { name :'firstname', label: "First Name", required: true, type: 'text' },
-        { name :'lastname', label: "Last Name", required: true, type: 'text' },
-        { name :'email', label: "Email", required: true, type: 'email' },
-        { name :'password', label: "Password", required: true, type: 'password' },
-        { name :'contact', label: "Contact No", required: true, type: 'text' },
+        { name :'firstname', label: "First Name", required: true, type: 'text', autoFocus: true },
+        { name :'lastname', label: "Last Name", required: true, type: 'text' , autoFocus: false},
+        { name :'email', label: "Email", required: true, type: 'email', autoFocus: false},
+        { name :'password', label: "Password", required: true, type: 'password', autoFocus: false },
+        { name :'contact', label: "Contact No", required: true, type: 'text', autoFocus: false },
     ]
     
     const [ formError, setFormError ] = React.useState(generateFieldsErrorDefault(formInputFields))
@@ -70,11 +66,9 @@ const Register = (props) => {
     }
     
     React.useEffect(() => {
-
       if(canSubmit) {
-        console.log('cansubmit')
+        console.log("cansubmit", formData);
       }
-
     },[formError])
 
     return (
@@ -100,6 +94,7 @@ const Register = (props) => {
                            error={!formError[field.name].isValid}
                            onChange={handleChange}
                            value={formData[field.name]}
+                           autoFocus={field.autoFocus}
                          />
                          {!formError[field.name].isValid && (
                            <Typography color="error">{formError[field.name].errMsg}</Typography>
@@ -126,4 +121,4 @@ const Register = (props) => {
 }
 
 
-export default withRouter(withStyles(style)(Register))
+export default withStyles(style)(Register)

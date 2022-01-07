@@ -5,12 +5,11 @@ import Header from '../common/header/Header'
 import { BrowserRouter as Router,  Route } from "react-router-dom";
 import BookShow from "../screens/bookshow/BookShow";
 import Confirmation from "../screens/confirmation/Confirmation";
-import * as TokenUtil from '../utils/TokenUtil'
 import LoginPopup from "../common/popup/LoginPopup";
 
 const Controller = (props) => {
   const baseUrl = "/api/v1/";
-  const [ isAuthenticated, setAuthenticated ] = useState(TokenUtil.isAuthenticated())  
+  const [ isAuthenticated, setAuthenticated ] = useState(false)  
   const [ showLoginModal, setShowLoginModal ] = useState(true)  
   console.log("controller called",props, isAuthenticated, showLoginModal)
 
@@ -42,6 +41,8 @@ const Controller = (props) => {
           showLoginModal={showLoginModal}           
           setAuthenticated={setAuthenticated} 
           setShowLoginModal={setShowLoginModal}
+          {...props} 
+          baseUrl={baseUrl}
         />
       </div>
     </Router>
