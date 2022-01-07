@@ -72,7 +72,7 @@ const Register = (props) => {
     React.useEffect(() => {
 
       if(canSubmit) {
-        // do post request here
+        console.log('cansubmit')
       }
 
     },[formError])
@@ -118,7 +118,7 @@ const Register = (props) => {
                 color="primary"  
                 type="submit"             
               >
-                Login
+                Register
           </Button>
         </form>
       </div>
