@@ -1,7 +1,7 @@
 import React from "react";
 import {  withRouter } from 'react-router-dom';
 import { FormControl, Input, InputLabel, Button, withStyles, Typography } from "@material-ui/core";
-import { ContactsOutlined, FormatStrikethroughSharp } from "@material-ui/icons";
+import { generateFieldsErrorDefault, generateFormInitialValues } from "../../common/form/FormUtils";
 
 const style  =theme =>({
     centerElement : {
@@ -28,19 +28,9 @@ const Register = (props) => {
         { name :'password', label: "Password", required: true, type: 'password' },
         { name :'contact', label: "Contact No", required: true, type: 'text' },
     ]
-    const fieldsErrorDefault = formInputFields.reduce ((prev,field) => {
-      const { name } = field
-      return { ...prev, [name] : { isValid: true, errMsg: 'required' }}
-    },{})  
-
-    const formInitialValues = formInputFields.reduce ((prev,field) => {
-      const { name } = field
-      return { ...prev, [name] : '' }
-    },{})
-    const [ formError, setFormError ] = React.useState(fieldsErrorDefault)
-
-    const [ formData, setFormData ] = React.useState(formInitialValues)
-
+    
+    const [ formError, setFormError ] = React.useState(generateFieldsErrorDefault(formInputFields))
+    const [ formData, setFormData ] = React.useState(generateFormInitialValues(formInputFields))
     const [ canSubmit, setCanSubmit ] = React.useState(false)
 
     const handleChange = (e) => {
