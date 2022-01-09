@@ -1,42 +1,40 @@
 /**
- *  generic file for token related functionality 
+ *  generic file for token related functionality
  */
 
-const tokenKey = "access-token"
-const customerUUIDKey = "UUID"
+const tokenKey = "access-token";
+const customerUUIDKey = "UUID";
 
 export const isAuthenticated = () => {
-  const token = getToken()
-  if( token && token !== ''){
-      return true
+  const token = getToken();
+  if (token && token !== "") {
+    return true;
   }
-  return false
-}
+  return false;
+};
 
 export const getToken = () => {
-    return sessionStorage.getItem(tokenKey);
-}
+  return sessionStorage.getItem(tokenKey);
+};
 
 export const setToken = (response) => {
-    const token = response.headers.get(tokenKey)
-    const customerUUID = response.json().id || ''
-    sessionStorage.setItem(tokenKey, token);
-    setCustomerUUID(customerUUID)
-}
+  const token = response.headers.get(tokenKey);
+  sessionStorage.setItem(tokenKey, token);
+};
 
 export const clearToken = () => {
-    sessionStorage.removeItem(tokenKey);
-    clearCustomerUUID();
-}
+  sessionStorage.removeItem(tokenKey);
+  clearCustomerUUID();
+};
 
 export const getCustomerUUID = () => {
-    return sessionStorage.getItem(customerUUIDKey);
-}
+  return sessionStorage.getItem(customerUUIDKey);
+};
 
 export const setCustomerUUID = (uuid) => {
-    sessionStorage.setItem(customerUUIDKey, uuid);
-}
+  sessionStorage.setItem(customerUUIDKey, uuid);
+};
 
 export const clearCustomerUUID = () => {
-    sessionStorage.removeItem(customerUUIDKey);
-}
+  sessionStorage.removeItem(customerUUIDKey);
+};

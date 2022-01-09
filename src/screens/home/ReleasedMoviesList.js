@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 const ReleasedMoviesList = (props) => {
-  const { releasedMoviesList }  = props
+  const { releasedMoviesList } = props;
   return (
     <div className="released__movie_list">
       <GridList cellHeight={350} className="" cols={4}>
@@ -31,6 +31,6 @@ const ReleasedMoviesList = (props) => {
       </GridList>
     </div>
   );
-}
+};
 
-export default ReleasedMoviesList
+export default ReleasedMoviesList;

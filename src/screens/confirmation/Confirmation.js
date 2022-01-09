@@ -50,10 +50,9 @@ const Confirmation = (props) => {
       tickets: [props.location.bookingSummary.tickets.toString()],
     });
 
-    bookTicket(data)
-      .then((data) => {
-        setBookingId(data.reference_number);
-      });
+    bookTicket(data).then((data) => {
+      setBookingId(data.reference_number);
+    });
 
     setOpen(true);
   };

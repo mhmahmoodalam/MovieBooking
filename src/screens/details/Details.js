@@ -1,65 +1,68 @@
 import React from "react";
-import { withStyles } from '@material-ui/core/styles';
-import './Details.css';
-import { GridList,GridListTile,GridListTileBar,  Typography } from "@material-ui/core";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import YouTube from 'react-youtube';
-import StarBorderIcon  from '@material-ui/icons/StarBorder'
+import { withStyles } from "@material-ui/core/styles";
+import "./Details.css";
+import {
+  GridList,
+  GridListTile,
+  GridListTileBar,
+  Typography,
+} from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import YouTube from "react-youtube";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { getMovieDetail } from "../../utils/HttpConnector";
 
-const styles = theme => ({
+const styles = (theme) => ({
   infotitle: {
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   section: {
-    marginTop: 16
+    marginTop: 16,
   },
   loader: {
-    margin: 10
+    margin: 10,
   },
   ratedStar: {
-    color: 'yellow',
-    cursor: 'pointer'
+    color: "yellow",
+    cursor: "pointer",
   },
-  unratedStar: {    
-    cursor: 'pointer'
+  unratedStar: {
+    cursor: "pointer",
   },
   artistDivTitle: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 16,
-    marginBottom: 16
+    marginBottom: 16,
   },
   artistProfile: {
-    height: '100%',
-    width:'100%'
+    height: "100%",
+    width: "100%",
   },
   gridListTileBar: {
-    fontSize: '0.8rem',
-    height: 32
-  }
-
-})
+    fontSize: "0.8rem",
+    height: 32,
+  },
+});
 
 const playerOpts = {
-  height: '390',
-  width: '100%',
+  height: "390",
+  width: "100%",
   playerVars: {
     autoplay: 0,
   },
 };
 
 const Details = (props) => {
-  const { classes } = props
-  const [ movieDetails, setMovieDetails ] = React.useState({})
-  const [ loading, setLoading ] = React.useState(true)
-  const [ selfMovieRating, setSelfMovieRating ] = React.useState(0)
+  const { classes } = props;
+  const [movieDetails, setMovieDetails] = React.useState({});
+  const [loading, setLoading] = React.useState(true);
+  const [selfMovieRating, setSelfMovieRating] = React.useState(0);
   React.useEffect(() => {
-      getMovieDetail(props.match.params.id)
-      .then((response) => {
-        setMovieDetails(response)
-        setLoading(false)
-      })
-  },[])
+    getMovieDetail(props.match.params.id).then((response) => {
+      setMovieDetails(response);
+      setLoading(false);
+    });
+  }, []);
   return (
     <div>
       {loading && (
@@ -78,7 +81,10 @@ const Details = (props) => {
       )}
       {!loading && (
         <div>
-          <div className="details__back" onClick={() => props.history.push("/")}>
+          <div
+            className="details__back"
+            onClick={() => props.history.push("/")}
+          >
             <Typography variant="body2">&#xFF1C;Back To Home</Typography>
           </div>
           <div className="details_container">
@@ -142,17 +148,21 @@ const Details = (props) => {
                   Artists:
                 </Typography>
                 <GridList cellHeight={150} cols={2}>
-                {movieDetails.artists.map((artist) => (
-                  <GridListTile key={artist.id} >
-                      <a href={artist.wiki_url} target="_blank" >
-                      <img src={artist.profile_url}  alt={`${artist.first_name} ${artist.last_name}`} className={classes.artistProfile}/>
-                      <GridListTileBar className={classes.gridListTileBar}
-                        title={`${artist.first_name} ${artist.last_name}`} 
-                      />
+                  {movieDetails.artists.map((artist) => (
+                    <GridListTile key={artist.id}>
+                      <a href={artist.wiki_url} target="_blank">
+                        <img
+                          src={artist.profile_url}
+                          alt={`${artist.first_name} ${artist.last_name}`}
+                          className={classes.artistProfile}
+                        />
+                        <GridListTileBar
+                          className={classes.gridListTileBar}
+                          title={`${artist.first_name} ${artist.last_name}`}
+                        />
                       </a>
-                  </GridListTile>
-                  
-                ))}
+                    </GridListTile>
+                  ))}
                 </GridList>
               </div>
             </div>
@@ -161,7 +171,7 @@ const Details = (props) => {
       )}
     </div>
   );
-}
+};
 
 /** with style is used as wrapper for material Ui theme based customization **/
 export default withStyles(styles)(Details);

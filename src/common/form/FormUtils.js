@@ -1,20 +1,19 @@
-
-/** 
- * generic functions to generate field error and initial values 
+/**
+ * generic functions to generate field error and initial values
  * should have the format of key value
- * fields : [{ name :'', label: "", required: true, type: '', autoFocus: true }] * 
+ * fields : [{ name :'', label: "", required: true, type: '', autoFocus: true }] *
  * **/
 
-export const generateFieldsErrorDefault =(formInputFields) => {
-    return formInputFields.reduce ((prev,field) => {
-        const { name } = field
-        return { ...prev, [name] : { isValid: true, errMsg: 'required' }}
-      },{})
-}   
+export const generateFieldsErrorDefault = (formInputFields) => {
+  return formInputFields.reduce((prev, field) => {
+    const { name } = field;
+    return { ...prev, [name]: { isValid: true, errMsg: "required" } };
+  }, {});
+};
 
-export  const generateFormInitialValues = (formInputFields) => {
+export const generateFormInitialValues = (formInputFields) => {
   return formInputFields.reduce((prev, field) => {
     const { name } = field;
     return { ...prev, [name]: "" };
   }, {});
-}
+};

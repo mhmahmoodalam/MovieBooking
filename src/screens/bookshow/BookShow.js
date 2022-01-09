@@ -34,25 +34,24 @@ const BookShow = (props) => {
   const [showId, setShowId] = useState("");
 
   useEffect(() => {
-    let dataShows = null;    
-      getMovieShowDetails(props.match.params.id, dataShows)
-      .then((response) => {
-        setOriginalShows(response.shows);
+    let dataShows = null;
+    getMovieShowDetails(props.match.params.id, dataShows).then((response) => {
+      setOriginalShows(response.shows);
 
-        let newLocations = [];
+      let newLocations = [];
 
-        for (let show of response.shows) {
-          newLocations.push({
-            id: show.theatre.city,
-            location: show.theatre.city,
-          });
-        }
+      for (let show of response.shows) {
+        newLocations.push({
+          id: show.theatre.city,
+          location: show.theatre.city,
+        });
+      }
 
-        newLocations = newLocations.filter(
-          (loc, index, self) => index === self.findIndex((c) => c.id === loc.id)
-        );
-        setLocations(newLocations);
-      });
+      newLocations = newLocations.filter(
+        (loc, index, self) => index === self.findIndex((c) => c.id === loc.id)
+      );
+      setLocations(newLocations);
+    });
   }, []);
 
   const locationChangeHandler = (event) => {
@@ -275,9 +274,7 @@ const BookShow = (props) => {
             <br />
             <Typography>Unit Price: Rs. {unitPrice}</Typography>
             <br />
-            <Typography>
-              Total Price: Rs. {unitPrice * tickets}
-            </Typography>
+            <Typography>Total Price: Rs. {unitPrice * tickets}</Typography>
             <br />
             <br />
             <Button

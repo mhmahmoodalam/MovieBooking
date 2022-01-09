@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -7,66 +7,72 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
-import TextField from '@material-ui/core/TextField';
+import MenuItem from "@material-ui/core/MenuItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Select from "@material-ui/core/Select";
+import Checkbox from "@material-ui/core/Checkbox";
+import TextField from "@material-ui/core/TextField";
 
-const styles = theme => ({
-  root:{
+const styles = (theme) => ({
+  root: {
     maxWidth: theme.spacing.unit * 38,
   },
   cardelement: {
     minWidth: theme.spacing.unit * 30,
     maxWidth: theme.spacing.unit * 30,
     margin: theme.spacing.unit,
-    
   },
   header: {
-    color : theme.palette.primary.light
-  }
-})
+    color: theme.palette.primary.light,
+  },
+});
 
 const ReleasedMoviesFilter = (props) => {
-  const { setFilter, filter, classes, genresList, artistsList  } = props
+  const { setFilter, filter, classes, genresList, artistsList } = props;
 
-  const [ movieName, setMovieName ] = React.useState(filter.title||'')
-  const [ genresSelected, setGenresSelected ] = React.useState(filter.genre||[])
-  const [ artistsSelected, setArtistsSelected ] = React.useState(filter.artists|| [])
-  const [ releaseDateStart, setReleaseDateStart ] = React.useState(filter.start_date||'')
-  const [ releaseDateEnd, setReleaseDateEnd ] = React.useState(filter.end_date || '')
-  
-  const genresOptions =  genresList.map((gen) => {
-    return gen.genre
-  })
-  const artistsOptions =  artistsList.map((artist) => {
-      return `${artist.first_name} ${artist.last_name}`
-  })
+  const [movieName, setMovieName] = React.useState(filter.title || "");
+  const [genresSelected, setGenresSelected] = React.useState(
+    filter.genre || []
+  );
+  const [artistsSelected, setArtistsSelected] = React.useState(
+    filter.artists || []
+  );
+  const [releaseDateStart, setReleaseDateStart] = React.useState(
+    filter.start_date || ""
+  );
+  const [releaseDateEnd, setReleaseDateEnd] = React.useState(
+    filter.end_date || ""
+  );
+
+  const genresOptions = genresList.map((gen) => {
+    return gen.genre;
+  });
+  const artistsOptions = artistsList.map((artist) => {
+    return `${artist.first_name} ${artist.last_name}`;
+  });
 
   const handleApplyFilters = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     /* default filter for relased movies */
-    const filter = { status: 'RELEASED' }
-    if(movieName !== ''){
-      filter["title"] = movieName
+    const filter = { status: "RELEASED" };
+    if (movieName !== "") {
+      filter["title"] = movieName;
     }
-    if(genresSelected.length > 0){
-      filter["genre"] = genresSelected.join(",")
+    if (genresSelected.length > 0) {
+      filter["genre"] = genresSelected.join(",");
     }
-    if(artistsSelected.length > 0){
-      filter["artists"] = artistsSelected.join(",")
+    if (artistsSelected.length > 0) {
+      filter["artists"] = artistsSelected.join(",");
     }
-    if(releaseDateStart !== ''){
-      filter["start_date"] = releaseDateStart
+    if (releaseDateStart !== "") {
+      filter["start_date"] = releaseDateStart;
     }
-    if(releaseDateEnd !== ''){
-      filter["end_date"] = releaseDateEnd
+    if (releaseDateEnd !== "") {
+      filter["end_date"] = releaseDateEnd;
     }
-    
-    setFilter(filter)
 
-  }
+    setFilter(filter);
+  };
   return (
     <div className="released__movie_filter">
       <Card className={classes.root}>
@@ -191,6 +197,6 @@ const ReleasedMoviesFilter = (props) => {
       </Card>
     </div>
   );
-}
+};
 /** with style is used as wrapper for material Ui theme based customization **/
-export default withStyles(styles)(ReleasedMoviesFilter)
+export default withStyles(styles)(ReleasedMoviesFilter);
