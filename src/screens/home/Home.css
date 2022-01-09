@@ -74,6 +74,11 @@ Also, these two parts should have a margin of 16px.
     cursor: pointer;
 }
 
+.released__movie_grid_img {
+    height: 100%;
+    width: 100%;
+}
+
 .released__movie_filter {
     width: 24%;
     margin: 16px;

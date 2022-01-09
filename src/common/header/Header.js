@@ -9,12 +9,7 @@ const Header = (props) => {
   const { isAuthenticated, location,history, setAuthenticated, setShowLoginModal } = props
   const loginButtonText = isAuthenticated? 'Logout':'Login'
   const isOnMovieDetailPage =  location && location.pathname && location.pathname.includes('/movie/')
-  React.useEffect(() => {
-    if(location && location.pathname && location.pathname.includes('/movie/')){
-        //make api call to check if current
-    }
-  },[location])
-
+  
   const handleLoginLogout = () => {
     if (isAuthenticated) {
       TokenUtil.clearToken();
@@ -35,7 +30,6 @@ const Header = (props) => {
       setShowLoginModal(true)
     }
   }
-
   return (
     <div className="header">
         <img className="header__logo" src={Logo} alt="Header Logo" />

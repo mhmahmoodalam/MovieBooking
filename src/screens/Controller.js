@@ -9,10 +9,9 @@ import LoginPopup from "../common/popup/LoginPopup";
 import * as TokenUtil from '../utils/TokenUtil'
 
 const Controller = (props) => {
-  const baseUrl = "/api/v1/";
+  
   const [ isAuthenticated, setAuthenticated ] = useState(TokenUtil.isAuthenticated())  
-  const [ showLoginModal, setShowLoginModal ] = useState(false)  
-  console.log("controller called",props, isAuthenticated, showLoginModal)
+  const [ showLoginModal, setShowLoginModal ] = useState(false) 
 
   return (
     <Router>
@@ -24,26 +23,25 @@ const Controller = (props) => {
         <Route
           exact
           path="/"
-          render={(props) => <Home {...props} baseUrl={baseUrl} />}
+          render={(props) => <Home {...props}  />}
         />
         <Route
           path="/movie/:id"
-          render={(props) => <Details {...props} baseUrl={baseUrl} />}
+          render={(props) => <Details {...props}  />}
         />
         <Route
           path="/bookshow/:id"
-          render={(props) => <BookShow {...props} baseUrl={baseUrl} />}
+          render={(props) => <BookShow {...props}  />}
         />
         <Route
           path="/confirm/:id"
-          render={(props) => <Confirmation {...props} baseUrl={baseUrl} />}
+          render={(props) => <Confirmation {...props} />}
         />
         <LoginPopup 
           showLoginModal={showLoginModal}           
           setAuthenticated={setAuthenticated} 
           setShowLoginModal={setShowLoginModal}
           {...props} 
-          baseUrl={baseUrl}
         />
       </div>
     </Router>

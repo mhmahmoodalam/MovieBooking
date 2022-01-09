@@ -2,6 +2,7 @@ import React from "react";
 import { FormControl, Input, InputLabel, Button, withStyles, Typography } from "@material-ui/core"
 import { generateFieldsErrorDefault, generateFormInitialValues } from "../../common/form/FormUtils"
 import * as TokenUtil from '../../utils/TokenUtil'
+import { login } from "../../utils/HttpConnector";
 
 const style  = theme => ( {
   centerElement : {
@@ -65,20 +66,13 @@ const Login = (props) => {
   
   React.useEffect(() => {
     if(canSubmit) {
-      fetch(props.baseUrl + `auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "no-cache",
-          "Authorization": `Basic ${btoa(`${formData.username}:${formData.password}`)}`
-        } 
-      })
+      login(formData)
         .then((response) => {
           if(response.status === 200 ){
 
             props.setAuthenticated(true)
             props.setShowLoginModal(false)
-            TokenUtil.setToken(btoa(`${formData.username}:${formData.password}`))
+            TokenUtil.setToken(response)
 
           }else if( response.status >= 400 && response.status < 500 ){
             // won't show actual error as it can lead to guessing

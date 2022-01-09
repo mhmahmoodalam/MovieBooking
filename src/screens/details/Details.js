@@ -5,6 +5,7 @@ import { GridList,GridListTile,GridListTileBar,  Typography } from "@material-ui
 import CircularProgress from '@material-ui/core/CircularProgress';
 import YouTube from 'react-youtube';
 import StarBorderIcon  from '@material-ui/icons/StarBorder'
+import { getMovieDetail } from "../../utils/HttpConnector";
 
 const styles = theme => ({
   infotitle: {
@@ -45,13 +46,7 @@ const Details = (props) => {
   const [ loading, setLoading ] = React.useState(true)
   const [ selfMovieRating, setSelfMovieRating ] = React.useState(0)
   React.useEffect(() => {
-    fetch(props.baseUrl + `movies/${props.match.params.id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache",
-      }
-    }).then((response) => response.json())
+      getMovieDetail(props.match.params.id)
       .then((response) => {
         setMovieDetails(response)
         setLoading(false)

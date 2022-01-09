@@ -29,9 +29,7 @@ const styles = theme => ({
 })
 
 const ReleasedMoviesFilter = (props) => {
-  const { setFilter, filter, classes  } = props
-  const [ genresList, setGenresList ] = React.useState([])
-  const [ artistsList, setArtistsList ] = React.useState([])
+  const { setFilter, filter, classes, genresList, artistsList  } = props
 
   const [ movieName, setMovieName ] = React.useState(filter.title||'')
   const [ genresSelected, setGenresSelected ] = React.useState(filter.genre||[])
@@ -39,32 +37,7 @@ const ReleasedMoviesFilter = (props) => {
   const [ releaseDateStart, setReleaseDateStart ] = React.useState(filter.start_date||'')
   const [ releaseDateEnd, setReleaseDateEnd ] = React.useState(filter.end_date || '')
   
-  React.useEffect(() => {
-    fetch(props.baseUrl + "artists?page=1&limit=10000", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache",
-      }
-    }).then((response) => response.json())
-      .then((response) => {
-        setArtistsList(response.artists);
-      })
-
-      fetch(props.baseUrl + "/genres", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "no-cache",
-        }
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          setGenresList(response.genres)
-        })
-
-
-  },[])
+  
 
   const genresOptions =  genresList.map((gen) => {
     return gen.genre
@@ -75,7 +48,7 @@ const ReleasedMoviesFilter = (props) => {
 
   const handleApplyFilters = (e) => {
     e.preventDefault()
-    const filter = {}
+    const filter = { status: 'RELEASED' }
     if(movieName !== ''){
       filter["title"] = movieName
     }

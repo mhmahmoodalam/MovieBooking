@@ -1,6 +1,7 @@
 import React from "react";
 import { FormControl, Input, InputLabel, Button, withStyles, Typography } from "@material-ui/core";
 import { generateFieldsErrorDefault, generateFormInitialValues } from "../../common/form/FormUtils";
+import { registerAccount } from "../../utils/HttpConnector";
 
 const style  =theme =>({
     centerElement : {
@@ -72,16 +73,7 @@ const Register = (props) => {
     
     React.useEffect(() => {
       if(canSubmit) {
-        fetch(props.baseUrl + `signup`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Cache-Control": "no-cache"
-          } ,
-          body : JSON.stringify(formData)
-          
-        })
-          .then((response) => {
+        registerAccount(formData).then((response) => {
             if(response.status === 201 ){  
               setRegisterSuccess(true)  
             }else if( response.status >= 400 && response.status < 500 ){

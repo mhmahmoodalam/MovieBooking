@@ -11,6 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import { Link } from "react-router-dom";
+import { getMovieShowDetails } from "../../utils/HttpConnector";
 
 const BookShow = (props) => {
   const [location, setLocation] = useState("");
@@ -33,17 +34,8 @@ const BookShow = (props) => {
   const [showId, setShowId] = useState("");
 
   useEffect(() => {
-    let dataShows = null;
-
-    fetch(props.baseUrl + "movies/" + props.match.params.id + "/shows", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache",
-      },
-      body: dataShows,
-    })
-      .then((response) => response.json())
+    let dataShows = null;    
+      getMovieShowDetails(props.match.params.id, dataShows)
       .then((response) => {
         setOriginalShows(response.shows);
 

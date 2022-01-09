@@ -15,6 +15,8 @@ import PropTypes from "prop-types";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import green from "@material-ui/core/colors/green";
 import { Link } from "react-router-dom";
+import { bookTicket } from "../../utils/HttpConnector";
+import { getToken } from "../../utils/TokenUtil";
 
 const styles = (theme) => ({
   close: {
@@ -48,16 +50,7 @@ const Confirmation = (props) => {
       tickets: [props.location.bookingSummary.tickets.toString()],
     });
 
-    fetch(props.baseUrl + "bookings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache",
-        Authorization: "Bearer " + sessionStorage.getItem("access-token"),
-      },
-      body: data,
-    })
-      .then((response) => response.json())
+    bookTicket(data)
       .then((data) => {
         setBookingId(data.reference_number);
       });
@@ -79,7 +72,7 @@ const Confirmation = (props) => {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache",
-        Authorization: "Bearer " + sessionStorage.getItem("access-token"),
+        Authorization: "Bearer " + getToken(),
       },
     })
       .then((response) => response.json())
@@ -96,7 +89,6 @@ const Confirmation = (props) => {
   };
 
   const { classes } = props;
-
   return (
     <div className="Details">
       <div className="confirmation marginTop16">
