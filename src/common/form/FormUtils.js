@@ -1,4 +1,10 @@
 
+/** 
+ * generic functions to generate field error and initial values 
+ * should have the format of key value
+ * fields : [{ name :'', label: "", required: true, type: '', autoFocus: true }] * 
+ * **/
+
 export const generateFieldsErrorDefault =(formInputFields) => {
     return formInputFields.reduce ((prev,field) => {
         const { name } = field

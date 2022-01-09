@@ -8,6 +8,7 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ReleasedMoviesFilter from "./ReleasedMoviesFilter";
 import ReleasedMoviesList from "./ReleasedMoviesList";
 
+/* Main component for movies list and upcoming movies */
 const Home = (props) => {
 
   const [upcomingMoviesList, setUpcomingMoviesList] = React.useState([]);
@@ -22,8 +23,8 @@ const Home = (props) => {
       })
     },[filter])
 
-    React.useEffect(() => {
-      getArtists().then((response) => {
+  React.useEffect(() => {
+    getArtists().then((response) => {
         setArtistsList(response.artists);
       })
       getGenres().then((response) => {
@@ -34,7 +35,7 @@ const Home = (props) => {
         setUpcomingMoviesList(response.movies)
       })
   
-    },[])
+  },[])
 
   return (
       <div>
@@ -64,4 +65,5 @@ const Home = (props) => {
       </div>
   )
 }
+
 export default withRouter(Home)

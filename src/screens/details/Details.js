@@ -24,10 +24,18 @@ const styles = theme => ({
   unratedStar: {    
     cursor: 'pointer'
   },
-  artistTitle: {
+  artistDivTitle: {
     fontWeight: 'bold',
     marginTop: 16,
     marginBottom: 16
+  },
+  artistProfile: {
+    height: '100%',
+    width:'100%'
+  },
+  gridListTileBar: {
+    fontSize: '0.8rem',
+    height: 32
   }
 
 })
@@ -52,7 +60,6 @@ const Details = (props) => {
         setLoading(false)
       })
   },[])
-  
   return (
     <div>
       {loading && (
@@ -131,17 +138,21 @@ const Details = (props) => {
                 ))}
               </div>
               <div className="artists">
-                <Typography className={classes.artistTitle}>
+                <Typography className={classes.artistDivTitle}>
                   Artists:
                 </Typography>
                 <GridList cellHeight={150} cols={2}>
                 {movieDetails.artists.map((artist) => (
                   <GridListTile key={artist.id} >
-                    <img src={artist.profile_url}  alt={`${artist.first_name} ${artist.last_name}`} />
-                    <GridListTileBar 
-                      title={`${artist.first_name} ${artist.last_name}`} 
-                    />
+                      <a href={artist.wiki_url} target="_blank" >
+                      <img src={artist.profile_url}  alt={`${artist.first_name} ${artist.last_name}`} className={classes.artistProfile}/>
+                      <GridListTileBar className={classes.gridListTileBar}
+                        title={`${artist.first_name} ${artist.last_name}`} 
+                        multiline
+                      />
+                      </a>
                   </GridListTile>
+                  
                 ))}
                 </GridList>
               </div>
@@ -152,4 +163,6 @@ const Details = (props) => {
     </div>
   );
 }
-export default withStyles(styles)(Details)
+
+/** with style is used as wrapper for material Ui theme based customization **/
+export default withStyles(styles)(Details);

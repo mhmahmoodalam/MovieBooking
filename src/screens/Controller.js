@@ -10,6 +10,7 @@ import * as TokenUtil from '../utils/TokenUtil'
 
 const Controller = (props) => {
   
+  /**  based on token values it is decided if logged in or not **/
   const [ isAuthenticated, setAuthenticated ] = useState(TokenUtil.isAuthenticated())  
   const [ showLoginModal, setShowLoginModal ] = useState(false) 
 

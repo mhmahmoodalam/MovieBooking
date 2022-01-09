@@ -1,3 +1,7 @@
+/**
+ *  generic file for token related functionality 
+ */
+
 const tokenKey = "access-token"
 const customerUUIDKey = "UUID"
 

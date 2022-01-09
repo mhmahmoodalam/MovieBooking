@@ -257,4 +257,5 @@ Confirmation.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+/** with style is used as wrapper for material Ui theme based customization **/
 export default withStyles(styles)(Confirmation);

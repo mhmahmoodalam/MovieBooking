@@ -16,6 +16,7 @@ const style  =theme =>({
         marginBottom: theme.spacing.unit,
     }
 })
+
 const Register = (props) => {
     const { classes } = props
     const formInputFields = [
@@ -26,6 +27,7 @@ const Register = (props) => {
         { name :'mobile_number', label: "Contact No", required: true, type: 'text', autoFocus: false },
     ]
     
+    /** using generic functions to generate field error and initial values based on form input Fields format**/
     const [ formError, setFormError ] = React.useState(generateFieldsErrorDefault(formInputFields))
     const [ formData, setFormData ] = React.useState(generateFormInitialValues(formInputFields))
     const [ canSubmit, setCanSubmit ] = React.useState(false)
@@ -72,6 +74,7 @@ const Register = (props) => {
     }
     
     React.useEffect(() => {
+      /** fired whenever form error is updated and can submit is true**/
       if(canSubmit) {
         registerAccount(formData).then((response) => {
             if(response.status === 201 ){  
@@ -146,5 +149,5 @@ const Register = (props) => {
     );
 }
 
-
+ /** with style is used as wrapper for material Ui theme based customization **/
 export default withStyles(style)(Register)

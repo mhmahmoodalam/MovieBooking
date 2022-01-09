@@ -37,8 +37,6 @@ const ReleasedMoviesFilter = (props) => {
   const [ releaseDateStart, setReleaseDateStart ] = React.useState(filter.start_date||'')
   const [ releaseDateEnd, setReleaseDateEnd ] = React.useState(filter.end_date || '')
   
-  
-
   const genresOptions =  genresList.map((gen) => {
     return gen.genre
   })
@@ -48,6 +46,7 @@ const ReleasedMoviesFilter = (props) => {
 
   const handleApplyFilters = (e) => {
     e.preventDefault()
+    /* default filter for relased movies */
     const filter = { status: 'RELEASED' }
     if(movieName !== ''){
       filter["title"] = movieName
@@ -71,115 +70,127 @@ const ReleasedMoviesFilter = (props) => {
   return (
     <div className="released__movie_filter">
       <Card className={classes.root}>
-        <CardContent  >
-          <Typography variant="subtitle1" className={`${classes.header} ${classes.cardelement}`}>
+        <CardContent>
+          <Typography
+            variant="subtitle1"
+            className={`${classes.header} ${classes.cardelement}`}
+          >
             FIND MOVIES BY:
           </Typography>
-            <div className={classes.cardelement}>
-              <FormControl fullWidth >
-                <InputLabel htmlFor="moviename" >
-                  <Typography color="textSecondary" >Movie Name</Typography>
-                </InputLabel>
-                <Input
-                  id="moviename"
-                  name="title"
-                  defaultValue={movieName}
-                  onChange={(e) => setMovieName(e.target.value)}
-                />
-              </FormControl>
-            </div>
-            <div className={classes.cardelement}>
-              <FormControl fullWidth>
-                <InputLabel htmlFor="genres" >
-                  <Typography color="textSecondary">Genres</Typography>
-                </InputLabel>
-                <Select
-                  id="genres"
-                  name="genre"
-                  value={genresSelected}
-                  onChange={(e) => setGenresSelected(e.target.value)}
-                  renderValue={selected => selected.join(', ')}
-                  multiple
-                >
-                  {genresOptions && genresOptions.map(option => (
-                    <MenuItem key={option} value={option}>
-                      <Checkbox checked={genresSelected.indexOf(option) > -1 } color="default" />
-                      <ListItemText primary={option} />
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </div>
-            <div className={classes.cardelement}>
-              <FormControl fullWidth>
-                <InputLabel htmlFor="artists" >
-                  <Typography color="textSecondary">Artists</Typography>
-                </InputLabel>
-                <Select
-                  id="artists"
-                  name="artists"
-                  value={artistsSelected}
-                  onChange={(e) => setArtistsSelected(e.target.value)}
-                  renderValue={selected => selected.join(', ')}
-                  multiple
-                >
-                  {artistsOptions && artistsOptions.map(option => (
-                    <MenuItem key={option} value={option}>
-                      <Checkbox checked={artistsSelected.indexOf(option) > -1 } color="default"  />
-                      <ListItemText primary={option} />
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </div>
-            <div className={classes.cardelement}>
-              <FormControl fullWidth>                
-                <TextField                
-                  id="release-date-start"
-                  name="start_date"
-                  label="Release Date Start"
-                  type="date"
-                  defaultValue={releaseDateStart}
-                  pattern="\d{4}-\d{2}-\d{2}"
-                  color="textSecondary"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => setReleaseDateStart(e.target.value)}
-                />
-              </FormControl>
-            </div>
-            <div className={classes.cardelement}>
-              <FormControl fullWidth>                
-                <TextField                
-                  id="release-date-end"
-                  label="Release Date End"
-                  name="end_date"
-                  type="date"
-                  pattern="\d{4}-\d{2}-\d{2}"
-                  defaultValue={releaseDateEnd}
-                  color="textSecondary"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={(e) => setReleaseDateEnd(e.target.value)}
-                />
-              </FormControl>
-            </div>
-            <br />
-            <div className={classes.cardelement}>
-              <Button
-                variant="contained"
-                onClick={handleApplyFilters}
-                color="primary"
-                fullWidth
+          <div className={classes.cardelement}>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="moviename">
+                <Typography color="textSecondary">Movie Name</Typography>
+              </InputLabel>
+              <Input
+                id="moviename"
+                name="title"
+                defaultValue={movieName}
+                onChange={(e) => setMovieName(e.target.value)}
+              />
+            </FormControl>
+          </div>
+          <div className={classes.cardelement}>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="genres">
+                <Typography color="textSecondary">Genres</Typography>
+              </InputLabel>
+              <Select
+                id="genres"
+                name="genre"
+                value={genresSelected}
+                onChange={(e) => setGenresSelected(e.target.value)}
+                renderValue={(selected) => selected.join(", ")}
+                multiple
               >
-                Apply
-              </Button>
-            </div>
+                {genresOptions &&
+                  genresOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      <Checkbox
+                        checked={genresSelected.indexOf(option) > -1}
+                        color="default"
+                      />
+                      <ListItemText primary={option} />
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div className={classes.cardelement}>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="artists">
+                <Typography color="textSecondary">Artists</Typography>
+              </InputLabel>
+              <Select
+                id="artists"
+                name="artists"
+                value={artistsSelected}
+                onChange={(e) => setArtistsSelected(e.target.value)}
+                renderValue={(selected) => selected.join(", ")}
+                multiple
+              >
+                {artistsOptions &&
+                  artistsOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      <Checkbox
+                        checked={artistsSelected.indexOf(option) > -1}
+                        color="default"
+                      />
+                      <ListItemText primary={option} />
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div className={classes.cardelement}>
+            <FormControl fullWidth>
+              <TextField
+                id="release-date-start"
+                name="start_date"
+                label="Release Date Start"
+                type="date"
+                defaultValue={releaseDateStart}
+                pattern="\d{4}-\d{2}-\d{2}"
+                color="textSecondary"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={(e) => setReleaseDateStart(e.target.value)}
+              />
+            </FormControl>
+          </div>
+          <div className={classes.cardelement}>
+            <FormControl fullWidth>
+              <TextField
+                id="release-date-end"
+                label="Release Date End"
+                name="end_date"
+                type="date"
+                pattern="\d{4}-\d{2}-\d{2}"
+                defaultValue={releaseDateEnd}
+                color="textSecondary"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={(e) => setReleaseDateEnd(e.target.value)}
+              />
+            </FormControl>
+          </div>
+          <br />
+          <div className={classes.cardelement}>
+            <Button
+              variant="contained"
+              onClick={handleApplyFilters}
+              color="primary"
+              fullWidth
+            >
+              Apply
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
   );
 }
+/** with style is used as wrapper for material Ui theme based customization **/
 export default withStyles(styles)(ReleasedMoviesFilter)
