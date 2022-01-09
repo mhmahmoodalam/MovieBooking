@@ -148,7 +148,6 @@ const Details = (props) => {
                       <img src={artist.profile_url}  alt={`${artist.first_name} ${artist.last_name}`} className={classes.artistProfile}/>
                       <GridListTileBar className={classes.gridListTileBar}
                         title={`${artist.first_name} ${artist.last_name}`} 
-                        multiline
                       />
                       </a>
                   </GridListTile>

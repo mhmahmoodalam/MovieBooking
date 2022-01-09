@@ -7,18 +7,15 @@ import * as TokenUtil from '../../utils/TokenUtil';
 
 const Header = (props) => {
   const { isAuthenticated, location,history, setAuthenticated, setShowLoginModal } = props
-  const loginButtonText = isAuthenticated? 'Logout':'Login'
   const isOnMovieDetailPage =  location && location.pathname && location.pathname.includes('/movie/')
   
-  const handleLoginLogout = () => {
-    if (isAuthenticated) {
+  const handleLogout = () => {
       TokenUtil.clearToken();
       setAuthenticated(false);
       history.push("/");
-    }else {
-        console.log("Not logged in..please login first..")
-        setShowLoginModal(true)
-    }
+  }
+  const handleLogin = () => {
+      setShowLoginModal(true)
   }
 
   const handleBookNow = (e) => {
@@ -37,12 +34,22 @@ const Header = (props) => {
             {
                 isOnMovieDetailPage &&
                 <Button variant="contained" color="primary" className="header__button" onClick={handleBookNow}>
-                    BOOK SHOW
+                  BOOK SHOW
                 </Button>
             }
-            <Button variant="contained" className="header__button" onClick={handleLoginLogout} >
-            {loginButtonText}
-            </Button>
+            {
+              !isAuthenticated &&
+              <Button variant="contained" className="header__button" onClick={handleLogin} >
+                Login
+              </Button>
+            }
+            {
+              isAuthenticated &&
+              <Button variant="contained" className="header__button" onClick={handleLogout} >
+                Logout
+              </Button>
+            }
+           
         </div>
         
     </div>

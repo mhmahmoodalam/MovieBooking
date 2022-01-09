@@ -98,8 +98,7 @@ You can check which button needs to be displayed here.
 It should be on the right of the header. 
 */
 .header__button {
-    margin-left: 16px !important;
-    
+    margin-left: 16px !important;    
 }
 
 /* 
